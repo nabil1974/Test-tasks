@@ -1,0 +1,44 @@
+{% extends 'guestbook/base.html' %}
+{% load static %}
+
+{% block title %} Добавить комментарий {% endblock %}
+
+{% block styles %}
+{% endblock %}
+{% block scripts %}
+{% endblock %}
+
+{% block content %}
+
+
+	<h3>Добавить комментарий к записи</h3>
+	<h4>Текст записи:</h4>
+	<p>{{ entry.content }}</p>
+	<h4>Автор записи:</h4>
+	<p>{{ entry.author }}, {{ entry.date }}</p>
+	<h4>Дата записи:</h4>
+	<p>{{ entry.date }}</p>
+
+	<h4>Ваш комментарий:</h4>
+
+	<form method="post">
+
+	    {% csrf_token %}
+
+	    {{ comment_form.as_p }}
+
+	    <input type="submit" name="submit" value="Комментировать" class="btn btn-primary btn-xs">
+	</form>
+
+	{% if comments %}
+	<h4>Комментарии, сделанные ранее:</h4>
+	<ul class="list-group">
+		{% for comment in comments %}
+		<li class="list-group-item">{{ comment.content }}, написал <a href="{% url 'guestbook:author_entries' comment.author %}">{{ comment.author }}</a> {{ comment.date }}</li>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<h4>Эту запись пока никто не комментировал до вас</h4>
+	{% endif %}
+
+{% endblock %}

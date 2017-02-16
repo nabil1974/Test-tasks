@@ -1,0 +1,57 @@
+{% extends 'guestbook/base.html' %}
+{% load static %}
+
+{% block title %} Главная {% endblock %}
+
+{% block styles %}
+{% endblock %}
+{% block scripts %}
+{% endblock %}
+
+{% block content %}
+	<div id="add-entry">
+		<a href="{% url 'guestbook:add_entry' %}" class="btn btn-primary btn-xs">Добавить запись</a>
+		<a href="http://www.codeskulptor.org/#user40_I7OFTdMzyj_21.py" target="_blank">Блэкджек!</a>
+	</div>
+	<ul class="list-group" id="entries">
+		{% for entry in entries %}		
+		<li class="list-group-item">
+ 			<div class="entry">
+ 				<a href="{% url 'guestbook:view_entry' entry.pk %}">
+					{{ entry.content|truncatechars:148 }}</a>
+			</div>
+			<div class="entry-meta">
+				<span class="meta-chunk">{{ entry.date }}</span>
+				<span class="meta-chunk"><a href="{% url 'guestbook:author_entries' entry.author %}">{{ entry.author }}</a></span>
+				<span class="meta-chunk">Комментариев: <a href="{% url 'guestbook:view_entry' entry.pk %}">{{ entry.comment_set.all|length }}</span>
+				<span class="meta-chunk"><a href="{% url 'guestbook:add_comment' entry.pk %}">Комментировать</a></span>
+			</div>
+		</li>
+		{% endfor %}
+	</ul>
+
+	<div class="pagination-container">
+		<ul class="pagination pagination-sm">
+
+		{% if entries.paginator.num_pages > 1 %}
+		    {% if entries.has_previous %}
+		        <li><a href="?page={{ entries.previous_page_number }}">←</a></li>
+		    {% endif %}
+
+			{% for num in entries.paginator.page_range %}
+		        {% if num == entries.number %}
+		            <li><a id="current">{{ num }}</a></li>
+		        {% else %}
+		            <li><a href="?page={{ num }}"> {{ num }}</a></li>
+		        {% endif %} 
+		    {% endfor %}
+
+		    {% if entries.has_next %}
+		        <li><a href="?page={{ entries.next_page_number }}">→</a></li>
+		    {% endif %}
+
+		{% endif %}
+		</ul>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,80 @@
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+.container{
+	width: 980px;
+}
+
+#upper-header{
+	display: inline-block;	
+}
+
+#upper-auth{
+	display: inline-block;
+	float: right;
+	margin-top: 36px;
+}
+
+#perex{
+	margin-bottom: 20px;
+}
+
+.errorlist, .is-taken {
+	list-style: none;
+	padding-left: 0;
+	font-size: 12px;
+	color: red;
+	position: absolute;
+}
+
+form > p:first-child, .errorlist + p, .is-taken + p {
+	padding-top: 25px;
+}
+
+#add-entry{
+	margin-bottom: 10px;
+}
+
+#entries{
+	box-shadow: none;
+}
+
+#entries li{
+	border: none;
+	padding-left: 0px;
+}
+
+.entry-meta {
+	font-size: 0.85em;
+}
+
+.list-group {
+	box-shadow: none;
+}
+
+.list-group-item {
+	border: none;
+}
+
+.pagination-container {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.pagination {
+	position: absolute;
+	top: 430px;
+	width: 100%;
+}
+
+.pagination a#current {
+	background-color: #337ab7;
+	color: white;
+}
+
+.pagination a#current:hover{
+	background-color: #337ab7;
+	color: white;
+}

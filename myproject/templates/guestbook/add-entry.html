@@ -1,0 +1,22 @@
+{% extends 'guestbook/base.html' %}
+{% load static %}
+
+{% block title %} Добавить запись {% endblock %}
+
+{% block styles %}
+{% endblock %}
+{% block scripts %}
+{% endblock %}
+
+{% block content %}
+
+	<form method="post">
+
+	    {% csrf_token %}
+
+	    {{ entry_form.as_p }}
+
+	    <input type="submit" name="submit" value="Добавить" class="btn btn-primary btn-xs">
+	</form>
+
+{% endblock %}

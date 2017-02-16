@@ -1,0 +1,31 @@
+{% extends 'guestbook/base.html' %}
+{% load static %}
+
+{% block title %}Записи {{ username }}{% endblock %}
+
+{% block styles %}
+{% endblock %}
+{% block scripts %}
+{% endblock %}
+
+{% block content %}
+
+	<h3>Записи {{ username }}</h3>
+
+	<ul class="list-group" id="entries">
+		{% for entry in entries %}		
+		<li class="list-group-item">
+ 			<div class="entry">
+ 				<a href="{% url 'guestbook:view_entry' entry.pk %}">
+					{{ entry.content|truncatechars:148 }}</a>
+			</div>
+			<div class="entry-meta">
+				<span class="meta-chunk">{{ entry.date }}</span>
+				<span class="meta-chunk">Комментариев: <a href="{% url 'guestbook:view_entry' entry.pk %}">{{ entry.comment_set.all|length }}</span>
+				<span class="meta-chunk"><a href="{% url 'guestbook:add_comment' entry.pk %}">Комментировать</a></span>
+			</div>
+		</li>
+		{% endfor %}
+	</ul>
+
+{% endblock %}

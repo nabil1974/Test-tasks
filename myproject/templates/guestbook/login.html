@@ -1,0 +1,27 @@
+{% extends 'guestbook/base.html' %}
+{% load static %}
+
+{% block title %} Вход {% endblock %}
+
+{% block styles %}
+{% endblock %}
+{% block scripts %}
+	$(function() {
+		$('input[type=text]').addClass('form-control');
+		$('input[type=password]').addClass('form-control');		
+	});
+{% endblock %}
+
+{% block content %}
+
+	<h1>Вход</h1>
+	
+	<form method="post" style="width:25%">
+		{% csrf_token %}
+		<p class='errorlist'></p>
+		{{ login_form.as_p }}
+
+	    <input type="submit" name="submit" value="Войти" class="btn btn-primary btn-xs"><a href="{% url 'guestbook:registration' %}"> Зарегистрироваться</a>
+	</form>
+
+{% endblock %}
