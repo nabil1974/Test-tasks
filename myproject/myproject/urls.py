@@ -21,5 +21,6 @@ from django.views.generic import TemplateView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^guestbook/', include('guestbook.urls', namespace='guestbook', app_name='guestbook')),
+    url(r'^table/', include('table.urls', namespace='table', app_name='table')),
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='index')
 ]

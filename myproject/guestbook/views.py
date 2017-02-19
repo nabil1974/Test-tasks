@@ -112,6 +112,9 @@ def author_login(request):
     next = ''
     if request.GET:
         next = request.GET['next']
+        print('next is ' + next)
+
+    print("next is " + next)
 
     form = LoginForm(request.POST or None)
     if request.POST and form.is_valid():
