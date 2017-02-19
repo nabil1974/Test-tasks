@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Главная {% endblock %}
+
+{% block styles %}
+{% endblock %}
+{% block scripts %}
+
+	$(function() {
+		$('a').mouseenter(function(){
+		    $(this).parent().siblings().children('a').css('text-decoration', 'underline')
+		});
+		$('a').mouseleave(function(){
+		    $(this).parent().siblings().children('a').css('text-decoration', 'none')
+		});
+	});
+
+{% endblock %}
+
+{% block content %}
+	<a href="/">К оглавлению</a>
+	{% if rows.count == 0 %}
+		<div>
+			<button class="btn btn-default">
+				<a href="{% url 'table:populate_rows' %}">Заполнить таблицу</a>
+			</button>
+		</div>
+	{% else %}
+		<div>
+			<button class="btn btn-default">
+				<a href="{% url 'table:add_row' %}">Добавить строку таблицы</a>
+			</button>
+			<button class="btn btn-default">
+				<a href="{% url 'table:purge_table' %}">Очистить таблицу</a>
+			</button>
+		</div>
+	{% endif %}
+
+	<table>
+		{% for row in rows %}
+			<tr>
+				{% for cell in row.cell_set.all %}
+					<td><a href="{% url 'table:edit_row' row.pk %}">{{ cell }}</a></td>
+				{% endfor %}
+			</tr>
+		{% endfor %}
+	</table>
+
+
+{% endblock %}
